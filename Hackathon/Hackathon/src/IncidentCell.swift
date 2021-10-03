@@ -13,15 +13,17 @@ struct IncidentCell: View {
     var persons: String = "John Doe"
     var textFont: Font = .system(size: 20)
     var timeStamp: Date = Date()
+    var info: String = ""
     @State private var isSelected = false
     var body: some View {
         HStack{
             Button(action: {
                 
                 data.isSelected = true
-                data.persons = [self.persons]
+                data.persons = self.persons
                 data.time = self.timeStamp
                 data.incidentType = self.incidentType
+                data.description = self.info
                 
                 
             }) {

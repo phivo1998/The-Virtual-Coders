@@ -125,8 +125,8 @@ extension PlaceAnnotationView {
         switch type {
         case "Spill":       return Image(systemName: "drop.triangle.fill")
         case "Injury":      return Image(systemName: "waveform.path.ecg")
-        case "fire":        return Image(systemName: "flame.fill")
-        case "gas leak":    return Image(systemName: "smoke.fill")
+        case "Fire":        return Image(systemName: "flame.fill")
+        case "Gas leak":    return Image(systemName: "smoke.fill")
         default: return Image(systemName: "photo.fill")
         }
     }
@@ -134,8 +134,8 @@ extension PlaceAnnotationView {
         switch type {
         case "Spill":       return .blue
         case "Injury":      return .red
-        case "fire":        return .orange
-        case "gas leak":    return .green
+        case "Fire":        return .orange
+        case "Gas leak":    return .green
         default: return .yellow
         }
     }
