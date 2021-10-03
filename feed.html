@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script language="javascript">
+
+function expandlist(){
+
+	itemtitle = "<center><a>List of Incidents</a></center>";
+	os = "<table><tr><td><INPUT type='button' onclick= 'expanddetail()' value='incident#123'></td></tr></table>";
+
+	document.getElementById("incident_item_out").innerHTML = itemtitle+os;
+
+}
+
+function expanddetail(){
+	detailtitle = "<a>Incident Details</a><form>";
+	map = "<a href='https://www.google.com/maps'><img scr='logo.jpg'></a>";
+	xh = "<ul><li>Location: <br><li>Time: <br><li> Level of Severity: </ul></form>";
+	report = "<INPUT type='button' value='View Incident Report'>"
+	document.getElementById("incidentdetails").innerHTML = detailtitle + map + xh + report;
+}
+
+
+</script>
+
+</head>
+
+
+
+<body bgcolor="#E4C0B8">
+
+<form>
+	<center><img src="logo.jpg" width= 150px, height = 150px, class="avatar">
+		<h1>ConocoPhillips Guardian</h1>
+		<h2>Incident Report Management Portal</h2> 
+	</center>
+</form>
+
+<form name="feedtabs">
+<center>	
+<table border="1", cellspacing="1" width=90% height=100%>
+<tr>
+<div class="sidebar">
+<td rowspan="2" colspan="100">
+	<center>
+		<p><input type = "button" style="height:30px;width:200px" id="incident_reported" onclick="expandlist()" value="Reported Incidents"></p>
+		<p><input type = "button" style="height:30px;width:200px" id="past_incidents" onclick="expandlist()" value="Past Incidents"></p>
+	</center>
+</td>
+</div>
+
+<td>
+	
+	<p id ="incident_item_out"></p>
+
+</td>
+
+<td id="incidentdetails">
+	
+</td>
+
+
+
+</table>
+</center>
+
+</body>
+</html>
