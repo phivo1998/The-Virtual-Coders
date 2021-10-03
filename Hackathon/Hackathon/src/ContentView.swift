@@ -10,46 +10,60 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+    @FetchRequest( entity: Report.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Report.incidentType, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var reports: FetchedResults<Report>
     @State private var username = ""
     @State private var password = ""
     @State private var loggedin = false
     var gradient1 = LinearGradient(colors: [Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)), Color(#colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1))], startPoint: .bottom, endPoint: .top)
+    
+    var backgroundColor = LinearGradient(colors: [Color(#colorLiteral(red: 0.4552846551, green: 0.01592451707, blue: 0.0186363291, alpha: 1)), Color(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))], startPoint: .bottom, endPoint: .top)
+    
+    
+    
     var body: some View {
-        
+        GeometryReader { geo in
+            
         NavigationView{
-            ZStack{
-                Color(UIColor.systemGray3)
-                    .ignoresSafeArea()
             VStack {
-                
-                Image(systemName: "photo.fill")
+                Image("logo")
                     .resizable()
                     .foregroundColor(Color.black)
                     .background(gradient1)
                     .scaledToFit()
-                    .frame(width: 100)
+                    .frame(width: 200)
                     .clipShape(Circle())
-                    
+                    .shadow(color: .black, radius: 5, x: 10, y: 10)
+                    .overlay(Circle().stroke(Color.white, lineWidth: 3))
                     .shadow(radius: 10)
+                
+                
                 Text("Login")
                     .font(.title)
+                    .padding()
                 //MARK: username textfield
                 TextField("Username", text: $username )
                     .font(.system(size: 20))
                     .padding()
                     .frame(width: 300, height: 50)
+                    .background(Color.white)
+                    .shadow(color: .black, radius: 10, x: 10, y: 10)
                     .border(Color.black, width: 2)
+                   
+                    .padding()
                 
                 //MARK: password textfield
-                TextField("Password", text: $password)
+                SecureField("Password", text: $password)
                     .font(.system(size: 20))
                     .padding()
                     .frame(width: 300, height: 50)
+                    .background(Color.white)
+                    .shadow(color: .black, radius: 10, x: 10, y: 10)
                     .border(Color.black, width: 2)
+                    .padding()
+                
                 //MARK: check button
                 NavigationLink(destination: {
                     MainView()
@@ -62,22 +76,23 @@ struct ContentView: View {
                             .frame(width: 100, height: 40)
                             .border(Color.black, width: 1)
                             .background(gradient1)
+                            .shadow(color: .black, radius: 10, x: 10, y: 10)
                     
                 }
             }
-           
-            if loggedin {
-                
-                
+            .frame(width: geo.size.width, height: geo.size.height + 100)
+            .background(backgroundColor)
+            .ignoresSafeArea()
             }
-            }
-           
+        .preferredColorScheme(.light)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
         }
     }
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
+            let newItem = Report(context: viewContext)
             newItem.timestamp = Date()
 
             do {
@@ -93,7 +108,7 @@ struct ContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { reports[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()

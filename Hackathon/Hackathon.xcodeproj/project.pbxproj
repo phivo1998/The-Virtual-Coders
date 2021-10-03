@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AD102C0327090B5A00AA9A9D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD102C0227090B5A00AA9A9D /* LocationManager.swift */; };
+		AD102C0527091A3B00AA9A9D /* IncidentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD102C0427091A3B00AA9A9D /* IncidentLocations.swift */; };
+		AD1DBC9E27098E7D008504A3 /* IncidentReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1DBC9D27098E7D008504A3 /* IncidentReportsView.swift */; };
+		AD39A07B2709986300BBF7B2 /* IncidentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD39A07A2709986300BBF7B2 /* IncidentCell.swift */; };
 		ADAD994B2708D5C100A9B4E5 /* HackathonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAD994A2708D5C100A9B4E5 /* HackathonApp.swift */; };
 		ADAD994D2708D5C100A9B4E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAD994C2708D5C100A9B4E5 /* ContentView.swift */; };
 		ADAD994F2708D5C200A9B4E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADAD994E2708D5C200A9B4E5 /* Assets.xcassets */; };
@@ -41,6 +44,9 @@
 
 /* Begin PBXFileReference section */
 		AD102C0227090B5A00AA9A9D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		AD102C0427091A3B00AA9A9D /* IncidentLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentLocations.swift; sourceTree = "<group>"; };
+		AD1DBC9D27098E7D008504A3 /* IncidentReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentReportsView.swift; sourceTree = "<group>"; };
+		AD39A07A2709986300BBF7B2 /* IncidentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentCell.swift; sourceTree = "<group>"; };
 		ADAD99472708D5C100A9B4E5 /* Hackathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADAD994A2708D5C100A9B4E5 /* HackathonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackathonApp.swift; sourceTree = "<group>"; };
 		ADAD994C2708D5C100A9B4E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -145,10 +151,13 @@
 			children = (
 				ADAD994A2708D5C100A9B4E5 /* HackathonApp.swift */,
 				ADAD994C2708D5C100A9B4E5 /* ContentView.swift */,
-				ADAD99792708DE9B00A9B4E5 /* MainView.swift */,
 				ADAD997C2708E42500A9B4E5 /* ReportView.swift */,
+				ADAD99792708DE9B00A9B4E5 /* MainView.swift */,
 				ADAD997E2708F68C00A9B4E5 /* IncidentData.swift */,
 				AD102C0227090B5A00AA9A9D /* LocationManager.swift */,
+				AD102C0427091A3B00AA9A9D /* IncidentLocations.swift */,
+				AD1DBC9D27098E7D008504A3 /* IncidentReportsView.swift */,
+				AD39A07A2709986300BBF7B2 /* IncidentCell.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -283,14 +292,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD1DBC9E27098E7D008504A3 /* IncidentReportsView.swift in Sources */,
 				ADAD99542708D5C200A9B4E5 /* Persistence.swift in Sources */,
 				ADAD994D2708D5C100A9B4E5 /* ContentView.swift in Sources */,
 				ADAD997D2708E42500A9B4E5 /* ReportView.swift in Sources */,
 				ADAD994B2708D5C100A9B4E5 /* HackathonApp.swift in Sources */,
+				AD102C0527091A3B00AA9A9D /* IncidentLocations.swift in Sources */,
 				AD102C0327090B5A00AA9A9D /* LocationManager.swift in Sources */,
 				ADAD997A2708DE9B00A9B4E5 /* MainView.swift in Sources */,
 				ADAD99572708D5C200A9B4E5 /* Hackathon.xcdatamodeld in Sources */,
 				ADAD997F2708F68C00A9B4E5 /* IncidentData.swift in Sources */,
+				AD39A07B2709986300BBF7B2 /* IncidentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +466,8 @@
 				DEVELOPMENT_TEAM = 2ZMZK7FV3K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Need location for incident tracking";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need location for incident tracking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -465,7 +479,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.AnthonyPolka.Hackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnthonyPolka.CoreDataProject2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -484,6 +498,8 @@
 				DEVELOPMENT_TEAM = 2ZMZK7FV3K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Need location for incident tracking";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need location for incident tracking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -495,7 +511,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.AnthonyPolka.Hackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnthonyPolka.CoreDataProject2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
