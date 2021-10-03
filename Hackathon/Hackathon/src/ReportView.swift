@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import FirebaseDatabase
 struct ReportView: View {
     @EnvironmentObject var data: IncidentData
     @State private var incedentTypeSlected = false
@@ -138,9 +138,23 @@ struct ReportView: View {
                     print(data.incidentType)
                     print(data.persons)
                     print(data.description)
-                    
+                    //Add Items to database as a report with unique Identifier
+                    database.child("TotalIncidents").getData(completion: {error, snapshop in guard error == nil else{
+                        print(error!.localizedDescription)
+                        return;
+                    }
+
+                    let incidentNum = snashot.value +1;
+                    })
+                    let object:[String: Any] = [
+                        "incidentNum": incidentNum    
+                        "incidentType": data.incidentType
+                        "persons":data.persons
+                        "description": data.description
+                    ]
+                    database.child("Incident #\(incidentNum)").setValue(object)
                 }),
-                      secondaryButton: .destructive(Text("Cancle")))
+                      secondaryButton: .destructive(Text("Cancel")))
             }
             
         }
