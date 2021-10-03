@@ -139,12 +139,12 @@ struct ReportView: View {
                     print(data.persons)
                     print(data.description)
                     //Add Items to database as a report with unique Identifier
-                    database.child("TotalIncidents").getData(completion: {error, snapshop in guard error == nil else{
+                    database.child("TotalIncidents").getData(completion: {error, snapshot in guard error == nil else{
                         print(error!.localizedDescription)
                         return;
                     }
 
-                    let incidentNum = snashot.value +1;
+                    let incidentNum = snapshot.value +1;
                     })
                     let object:[String: Any] = [
                         "incidentNum": incidentNum    
