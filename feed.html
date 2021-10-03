@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script language="javascript">
+
+/* onclick triggered functioni for both reported incidents and past insidents */
+function expandlist(){
+	itemtitle = "<center><a>List of Incidents</a>";
+	os = "<table>";
+
+	var i;
+	var list1=4;
+	var j;
+	for(i=list1; i>0; i--){ 		/*creating incident buttons and incident numbers*/
+		j = i;
+		incident_number = i;
+			os = os + "<tr><td><INPUT type='button' style='height:30px;width:200px;background-color:yellow;' onclick= 'expanddetail()' value='Incident" + incident_number + "'></td>";
+	    
+	    if(j == list1){
+	      yt = "<td><span>&#128308;</span></td></tr>"; 
+	    }
+	    else{
+	      yt = "</tr>";
+	    }
+
+	    os = os + yt;
+	}
+
+	endoftable = "</table></center>";
+
+	document.getElementById("incident_item_out").innerHTML = itemtitle + os + endoftable;
+}
+
+
+function expanddetail(){
+	detailtitle = "<form><a>Incident Details</a>";
+
+	map = "<p><img src='mockmap.jpg' width=30% height = 30%></p>";
+	xh = "<ul style='list-style-type: none;' align=center><li>Incident Type: Electrical <li>Location: Building C floor 2 <li>Time: 10/2/2021 11:45 AM <li> Level of Severity: Low </ul>";
+	gallery = "<table><tr><td>Incident Views</td></tr><tr><td><img src='photo1.jpeg' width =20% height = 20%><img src='photo2.jpeg' width =20% height = 20%><img src='photo3.jpeg' width =15% height = 15%></td></tr></table>";
+	report = "<INPUT type='button' value='View Incident Report'>";
+	alert = "<INPUT type='button' value='Send Warning Alert'></form>";
+	document.getElementById("incidentdetails").innerHTML = detailtitle + map + xh + gallery + report + alert;
+
+}
+
+
+</script>
+
+</head>
+
+
+
+<body bgcolor="#E4C0B8">
+
+<form>
+	<center><img src="logo.jpg" width= 150px height = 150px class="avatar">
+		<h1>ConocoPhillips Guardian</h1>
+		<h2>Incident Report Management Portal</h2> 
+	</center>
+</form>
+
+<form name="feedtabs">
+<center>	
+<table border="1", width=90% height=600>
+<tr>
+<td width=20%>
+		<p><input type = "button" style="height:30px;width:200px" id="incident_reported" onclick="expandlist()" value="Reported Incidents"></p>
+		<p><input type = "button" style="height:30px;width:200px" id="past_incidents" onclick="expandlist()" value="Past Incidents"></p>
+</td>
+
+
+<td id="incident_item_out" align = "center" width = 30%>
+</td>
+
+
+<td id="incidentdetails" align = "center" width = 40%>
+</td>
+
+
+</tr>
+</table>
+</center>
+
+</body>
+</html>

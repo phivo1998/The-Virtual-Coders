@@ -1,14 +1,44 @@
 <html>
-    <link href=:popup.css" rel="stylesheet">
-    <script defer src="script.js"></script>
 <heading>
+    <script language="javascript">
+        function userlogin()
+        { 
+            document.login.submit();
+        }
+    </script>
 </heading>
 <body bgcolor="black">
 
 <p>
-<center><img src="logo.jpg"></center>
+<center><img src="logo.jpg" width="300" length="300"></center>
 <p>
-    <b><u><center><font color="white"><font size="100">Incident Reporter</b></u></center></font>
+    <b><u><center><font color="Salmon"><font size="100">Incident Reporter</b></u></center></font>
+    <center>
+        <form name="login" method="post">
+            <div class="container">
+            <p><label for="uname"><b><font size="5"><font color="white">Username</font></b></label>
+              <input type="text" placeholder="Enter Username" name="uname" maxlength = "12" size = "10" required>
+            </p>
+              
+            <p><label for="psw"><b><font size="5"><font color="white">Password</font></b></label>
+              <input type="password" placeholder="Enter Password" name="psw" maxlength = "12" size = "10" required>
+            </p>
+            </div>
+        
+            <div class="container">
+              <button type="submit" onclick="userlogin()">Login</button>
+              <button type="button">Cancel</button>
+            </div>
+<p> 
+    <center> 
+        <font size="5"><font color="white">Emergency</font>
+        <p>
+            <center><img src="phone.png"width="80" height="80"></center>
+        <p>
+            <a href="tel:112;phone-context=emergency.example.com">911</a>
+        </p>
+        </p>
+    </center>
 
 
 </body>

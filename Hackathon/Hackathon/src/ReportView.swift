@@ -6,14 +6,37 @@
 //
 
 import SwiftUI
+
 import FirebaseDatabase
+
+import CoreData
+
+
 struct ReportView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest( entity: Report.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Report.incidentType, ascending: true)],
+        animation: .default)
+    
+    private var reports: FetchedResults<Report>
+    
     @EnvironmentObject var data: IncidentData
+    @StateObject var locationManager = LocationManager()
     @State private var incedentTypeSlected = false
     @State private var incidentPicked = ""
     @State private var personsField = ""
     @State private var incidentDescription = ""
     @State private var confirm = false
+    
+    var userLatitude: String {
+        return "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
+    }
+    var userLongitude: String {
+        return "\(locationManager.lastLocation?.coordinate.longitude ?? 0)"
+    }
+    
     var incidentType = ["Spill", "Injury", "fire", "gas leak"]
     var backgroundColor = LinearGradient(colors: [Color(#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)), Color(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))], startPoint: .bottom, endPoint: .top)
     var body: some View {
@@ -131,10 +154,12 @@ struct ReportView: View {
                 }
             }
             .padding(.top, 70)
+            //MARK: Confirm report popup
             .alert(isPresented: $confirm) {
                 Alert(title: Text("Confirm"),
                       message: Text("Confirm your report"),
                       primaryButton: .default(Text("Accept"), action: {
+
                     print(data.incidentType)
                     print(data.persons)
                     print(data.description)
@@ -153,13 +178,39 @@ struct ReportView: View {
                         "description": data.description
                     ]
                     database.child("Incident #\(incidentNum)").setValue(object)
+
+                   addItem()
+                    for i in reports {
+                        print(i)
+                    }
+                    
                 }),
                       secondaryButton: .destructive(Text("Cancel")))
             }
             
         }
+        .preferredColorScheme(.light)
         .background(backgroundColor)
         .ignoresSafeArea()
+    }
+    private func addItem() {
+        withAnimation {
+            let newItem = Report(context: viewContext)
+            //newItem.persons = data.persons
+            newItem.timestamp = Date()
+            newItem.incidentType = data.incidentType
+            newItem.incidentReport = data.description
+            newItem.longitude = "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
+            newItem.latitude = "\(locationManager.lastLocation?.coordinate.longitude ?? 0)"
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
     }
 
 }
@@ -200,6 +251,7 @@ struct ReportView_Previews: PreviewProvider {
     static var previews: some View {
         ReportView()
             .environmentObject(IncidentData())
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
 
@@ -210,3 +262,4 @@ extension ReportView {
         return splitNames
     }
 }
+
