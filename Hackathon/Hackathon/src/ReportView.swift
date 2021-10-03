@@ -6,7 +6,11 @@
 //
 
 import SwiftUI
+
+import FirebaseDatabase
+
 import CoreData
+
 
 struct ReportView: View {
     
@@ -155,13 +159,33 @@ struct ReportView: View {
                 Alert(title: Text("Confirm"),
                       message: Text("Confirm your report"),
                       primaryButton: .default(Text("Accept"), action: {
+
+                    print(data.incidentType)
+                    print(data.persons)
+                    print(data.description)
+                    //Add Items to database as a report with unique Identifier
+                    database.child("TotalIncidents").getData(completion: {error, snapshot in guard error == nil else{
+                        print(error!.localizedDescription)
+                        return;
+                    }
+
+                    let incidentNum = snapshot.value +1;
+                    })
+                    let object:[String: Any] = [
+                        "incidentNum": incidentNum    
+                        "incidentType": data.incidentType
+                        "persons":data.persons
+                        "description": data.description
+                    ]
+                    database.child("Incident #\(incidentNum)").setValue(object)
+
                    addItem()
                     for i in reports {
                         print(i)
                     }
                     
                 }),
-                      secondaryButton: .destructive(Text("Cancle")))
+                      secondaryButton: .destructive(Text("Cancel")))
             }
             
         }
