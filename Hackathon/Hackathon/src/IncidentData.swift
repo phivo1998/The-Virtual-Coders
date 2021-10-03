@@ -6,10 +6,27 @@
 //
 
 import Foundation
+import MapKit
+
+struct Location: Identifiable {
+    
+    var id = UUID()
+    var name: String
+    var coordinate: CLLocationCoordinate2D
+}
 
 class IncidentData: ObservableObject {
     @Published var isSelected = false
     @Published var incidentType = ""
     @Published var persons = [String]()
     @Published var description = ""
+    @Published var annotations: [Location] = []
+}
+class DisplayData: ObservableObject {
+    @Published var isSelected = false
+    @Published var incidentType = ""
+    @Published var persons = [String]()
+    @Published var description = ""
+    @Published var annotations: [Location] = []
+    @Published var time: Date = Date()
 }
