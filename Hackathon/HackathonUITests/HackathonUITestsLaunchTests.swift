@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import Firebase
+//import Firebase
 class HackathonUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
@@ -19,7 +19,7 @@ class HackathonUITestsLaunchTests: XCTestCase {
 
     func testLaunch() throws {
         let app = XCUIApplication()
-        FirebaseApp.configure()
+        //FirebaseApp.configure()
         app.launch()
 
         // Insert steps here to perform after app launch but before taking a screenshot,
