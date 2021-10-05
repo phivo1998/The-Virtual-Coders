@@ -155,11 +155,36 @@ struct ReportView: View {
                 Alert(title: Text("Confirm"),
                       message: Text("Confirm your report"),
                       primaryButton: .default(Text("Accept"), action: {
+
+
+                    print(data.incidentType)
+                    print(data.persons)
+                    print(data.description)
+                    //Add Items to database as a report with unique Identifier
+
+//                     let ref = Database.database().reference();
+// //                    ref.child("TotalIncidents").observeSingleEvent(of: .value, with: {snapshot in guard let incidentNum1 = snapshot.value as? [String:Any] else{
+// //                        return
+// //                    }
+// //
+// //                    })
+//                     let incidentNum = SystemRandomNumberGenerator();
+//                     let object:[String: Any] = [
+//                         "incidentNum": incidentNum,
+//                         "incidentType": data.incidentType,
+//                         "persons":data.persons,
+//                         "description": data.description
+//                     ]
+                    
+//                     ref.child("Incident #\(incidentNum)").setValue(object)
+
+
                    addItem()
                     for i in reports {
                         print(i)
                     }
                     
+
                 }),
                       secondaryButton: .destructive(Text("Cancle")))
             }
