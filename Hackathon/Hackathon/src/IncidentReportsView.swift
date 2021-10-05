@@ -59,7 +59,8 @@ struct IncidentReports: View {
                             
                             IncidentCell(incidentType: report.incidentType ?? "",
                                          persons: report.persons ?? "",
-                                         timeStamp: report.timestamp ?? Date())
+                                         timeStamp: report.timestamp ?? Date(),
+                                         info: report.incidentReport ?? "")
                         }
                     }
                 }
@@ -70,15 +71,23 @@ struct IncidentReports: View {
         .background(backgroundColor)
         .ignoresSafeArea()
         .sheet(isPresented: $data.isSelected, onDismiss: didDismiss) {
-            
+            VStack{
                 Text(data.incidentType)
+                    .font(.title)
                 Text(data.time, formatter: itemFormatter)
-                //Text("\(data.persons[0])")
+                    .font(.subheadline)
+                Text(data.persons)
+                    .font(.system(size: 20))
+                
                 Text(data.description)
+                    .font(.title)
+                    .padding()
+                    .border(Color.black, width: 1)
+            }
             
               
         }
-        .background(Color.clear)
+        
     }
     
     

@@ -18,14 +18,14 @@ struct Location: Identifiable {
 class IncidentData: ObservableObject {
     @Published var isSelected = false
     @Published var incidentType = ""
-    @Published var persons = [String]()
+    @Published var persons = ""
     @Published var description = ""
     @Published var annotations: [Location] = []
 }
 class DisplayData: ObservableObject {
     @Published var isSelected = false
     @Published var incidentType = ""
-    @Published var persons = [String]()
+    @Published var persons = ""
     @Published var description = ""
     @Published var annotations: [Location] = []
     @Published var time: Date = Date()

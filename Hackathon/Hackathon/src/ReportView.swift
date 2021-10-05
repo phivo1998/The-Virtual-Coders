@@ -6,11 +6,7 @@
 //
 
 import SwiftUI
-
-//import FirebaseDatabase
-
 import CoreData
-
 
 struct ReportView: View {
     
@@ -37,7 +33,7 @@ struct ReportView: View {
         return "\(locationManager.lastLocation?.coordinate.longitude ?? 0)"
     }
     
-    var incidentType = ["Spill", "Injury", "fire", "gas leak"]
+    var incidentType = ["Spill", "Injury", "Fire", "Gas leak"]
     var backgroundColor = LinearGradient(colors: [Color(#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)), Color(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))], startPoint: .bottom, endPoint: .top)
     var body: some View {
         GeometryReader { geo in
@@ -123,7 +119,7 @@ struct ReportView: View {
                 HStack {
                     //MARK: send report button
                     Button(action: {
-                        data.persons = splitNames(names: self.personsField)
+                        data.persons = self.personsField
                         data.description = incidentDescription
                         self.confirm = true
                     
@@ -160,6 +156,7 @@ struct ReportView: View {
                       message: Text("Confirm your report"),
                       primaryButton: .default(Text("Accept"), action: {
 
+
                     print(data.incidentType)
                     print(data.persons)
                     print(data.description)
@@ -181,6 +178,7 @@ struct ReportView: View {
                     
 //                     ref.child("Incident #\(incidentNum)").setValue(object)
 
+
                    addItem()
                     for i in reports {
                         print(i)
@@ -188,7 +186,7 @@ struct ReportView: View {
                     
 
                 }),
-                      secondaryButton: .destructive(Text("Cancel")))
+                      secondaryButton: .destructive(Text("Cancle")))
             }
             
         }
@@ -201,6 +199,7 @@ struct ReportView: View {
             let newItem = Report(context: viewContext)
             //newItem.persons = data.persons
             newItem.timestamp = Date()
+            newItem.persons = data.persons
             newItem.incidentType = data.incidentType
             newItem.incidentReport = data.description
             newItem.longitude = "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
@@ -223,7 +222,7 @@ struct IncidentSelection: View {
     @EnvironmentObject var data: IncidentData
     @State var selected = false
     @State var selection = ""
-    var incidentType = ["Spill", "Injury", "fire", "gas leak"]
+    var incidentType = ["Spill", "Injury", "Fire", "Gas leak"]
     var body: some View {
         VStack{
             ForEach(incidentType, id: \.self) { i in
